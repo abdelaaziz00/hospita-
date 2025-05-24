@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informations Régionales</title>
+    
+</head>
+<body>
+    <div class="container">
+        <h1>Informations Régionales</h1>
+        <div class="details" id="regionDetails">
+            <!-- Les détails seront ajoutés dynamiquement ici -->
+        </div>
+        <button onclick="window.history.back()">Retour</button>
+    </div>
+
+    <script>
+        // Obtenir les paramètres depuis l'URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const region = urlParams.get('region');
+
+        const regionDetails = document.getElementById('regionDetails');
+
+        if (region === 'morocco') {
+            regionDetails.innerHTML = `
+                <h2>Votre ville est :</h2>
+                <ul>
+                    <li>Marrakech</li>
+                    <li>Casablanca</li>
+                    <li>Rabat</li>
+                    <li>Autre</li>
+                </ul>
+            `;
+        } else if (region === 'europe') {
+            regionDetails.innerHTML = `
+                <h2>Votre pays est :</h2>
+                <ul>
+                    <li>France</li>
+                    <li>Belgique</li>
+                    <li>Italie</li>
+                    <li>Autre</li>
+                </ul>
+            `;
+        } else {
+            regionDetails.innerHTML = `
+                <h2>Autre région :</h2>
+                <p>Vous passez directement à l'étape de l'intervention.</p>
+            `;
+        }
+    </script>
+</body>
+</html>

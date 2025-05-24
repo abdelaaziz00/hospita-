@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit User</title>
+</head>
+<body>
+  <h1>Edit User Details</h1>
+  <form method="POST" action="/button/edit/{{id}}">
+    <label for="needs">Needs:</label>
+    <input type="text" id="needs" name="needs" value="{{needs}}" required><br><br>
+
+    <label for="gender">Gender:</label>
+    <input type="text" id="gender" name="gender" value="{{gender}}" required><br><br>
+
+    <label for="timing">Timing:</label>
+    <input type="text" id="timing" name="timing" value="{{timing}}" required><br><br>
+
+    <label for="appointment_date">Appointment Date:</label>
+    <input type="date" id="appointment_date" name="appointment_date" value="{{appointment_date}}"><br><br>
+
+    <label for="appointment_time">Appointment Time:</label>
+    <input type="time" id="appointment_time" name="appointment_time" value="{{appointment_time}}"><br><br>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" value="{{email}}" required><br><br>
+
+    <label for="phone">Phone:</label>
+    <input type="text" id="phone" name="phone" value="{{phone}}" required><br><br>
+
+    <label for="first_name">First Name:</label>
+    <input type="text" id="first_name" name="first_name" value="{{first_name}}" required><br><br>
+
+    <label for="last_name">Last Name:</label>
+    <input type="text" id="last_name" name="last_name" value="{{last_name}}" required><br><br>
+
+    <label for="user_message">Message:</label>
+    <textarea id="user_message" name="user_message">{{user_message}}</textarea><br><br>
+
+    
+
+    <button type="submit">Update</button>
+  </form>
+</body>
+</html>

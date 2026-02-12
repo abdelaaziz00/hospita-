@@ -4,6 +4,15 @@ const path = require('path');
 const mysql = require('mysql2'); // Import mysql2 package
 const fs = require('fs'); // Import fs module to read files
 const app = express();
+const session = require('express-session'); // Import express-session
+
+// Configure Session Middleware
+app.use(session({
+  secret: 'secret-key', // Change this to a secure random string
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false } // Set to true if using HTTPS
+}));
 
 // Middleware to parse form data
 app.use(express.json());
@@ -11,8 +20,9 @@ app.use(express.urlencoded({ extended: true }));
 
 
 // Root route
+// Root route - Serve Landing Page
 app.get('/', (req, res) => {
-  res.send('Welcome to the server!');
+  res.sendFile(path.join(__dirname, 'public', 'landing.html'));
 });
 
 // Serve static files
@@ -55,8 +65,52 @@ app.get('/upload', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// Serve output.html only at /output
-app.get('/output', (req, res) => {
+// Serve login.html at /login
+app.get('/login', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'login.html'));
+});
+
+// Handle Login Logic
+app.post('/login', (req, res) => {
+  const { email, password } = req.body;
+  const query = 'SELECT * FROM admin WHERE mail_admin = ? AND password_admin = ?';
+
+  db.execute(query, [email, password], (err, results) => {
+    if (err) {
+      console.error('Error during login:', err);
+      return res.status(500).send('Internal Server Error');
+    }
+
+    if (results.length > 0) {
+      req.session.loggedIn = true;
+      req.session.user = results[0];
+      res.redirect('/output');
+    } else {
+      res.send('<script>alert("Invalid Credentials"); window.location.href = "/login";</script>');
+    }
+  });
+});
+
+// Logout Route
+app.get('/logout', (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.error('Error destroying session:', err);
+    }
+    res.redirect('/');
+  });
+});
+
+// Middleware to protect routes
+function isAuthenticated(req, res, next) {
+  if (req.session.loggedIn) {
+    return next();
+  }
+  res.redirect('/login');
+}
+
+// Serve output.html only at /output (Protected)
+app.get('/output', isAuthenticated, (req, res) => {
   const query = 'SELECT id,needs, gender, timing, appointment_date, appointment_time, email, phone, first_name, last_name, user_message FROM appointments';
 
   // Perform the database query to get the data
@@ -109,7 +163,7 @@ app.get('/output', (req, res) => {
 
 
 
-app.use('/img', express.static('C:/Users/abdel/Desktop/balabil/img'));
+app.use('/img', express.static(path.join(__dirname, 'img')));
 
 
 
@@ -118,7 +172,7 @@ app.use('/img', express.static('C:/Users/abdel/Desktop/balabil/img'));
 
 
 // Route to fetch user data and render the HTML
-app.get('/button/read/:id', (req, res) => {
+app.get('/button/read/:id', isAuthenticated, (req, res) => {
   const userId = req.params.id;
 
   const query = `
@@ -147,26 +201,26 @@ app.get('/button/read/:id', (req, res) => {
 
       const imagePath = userData.image_path.replace(/\\/g, '/'); // Normalize the slashes
       const fullImagePath = `/img/${path.basename(imagePath)}`; // Ensure only the filename is appended
-      
 
-      
+
+
       const modifiedContent = htmlContent
-      .replace('{{id}}', userData.id)
-      .replace('{{needs}}', userData.needs)
-      .replace('{{gender}}', userData.gender)
-      .replace('{{timing}}', userData.timing)
-      .replace('{{appointment_date}}', userData.appointment_date || 'N/A')
-      .replace('{{appointment_time}}', userData.appointment_time || 'N/A')
-      .replace('{{email}}', userData.email)
-      .replace('{{phone}}', userData.phone)
-      .replace('{{first_name}}', userData.first_name)
-      .replace('{{last_name}}', userData.last_name)
-      .replace('{{user_message}}', userData.user_message || 'No message provided')
-      .replace('{{image_path}}', fullImagePath);
-    
+        .replace('{{id}}', userData.id)
+        .replace('{{needs}}', userData.needs)
+        .replace('{{gender}}', userData.gender)
+        .replace('{{timing}}', userData.timing)
+        .replace('{{appointment_date}}', userData.appointment_date || 'N/A')
+        .replace('{{appointment_time}}', userData.appointment_time || 'N/A')
+        .replace('{{email}}', userData.email)
+        .replace('{{phone}}', userData.phone)
+        .replace('{{first_name}}', userData.first_name)
+        .replace('{{last_name}}', userData.last_name)
+        .replace('{{user_message}}', userData.user_message || 'No message provided')
+        .replace('{{image_path}}', fullImagePath);
+
       console.log('Original Image Path:', userData.image_path);
-console.log('Normalized Image Path:', imagePath);
-console.log('Full Image Path:', fullImagePath);
+      console.log('Normalized Image Path:', imagePath);
+      console.log('Full Image Path:', fullImagePath);
 
       //console.log(modifiedContent);
       res.send(modifiedContent);
@@ -178,7 +232,7 @@ console.log('Full Image Path:', fullImagePath);
 
 
 
-app.get('/button/edit/:id', (req, res) => {
+app.get('/button/edit/:id', isAuthenticated, (req, res) => {
   const userId = req.params.id;
 
   // SQL query to fetch user details based on ID
@@ -220,7 +274,7 @@ app.get('/button/edit/:id', (req, res) => {
         .replace('{{first_name}}', userData.first_name)
         .replace('{{last_name}}', userData.last_name)
         .replace('{{user_message}}', userData.user_message || '')
-        
+
 
       // Send the modified HTML content as the response
       res.send(modifiedContent);
@@ -229,7 +283,7 @@ app.get('/button/edit/:id', (req, res) => {
 });
 
 // Route to handle form submission for editing a user
-app.post('/button/edit/:id', (req, res) => {
+app.post('/button/edit/:id', isAuthenticated, (req, res) => {
   const userId = req.params.id;
   const {
     needs,
@@ -277,7 +331,7 @@ app.post('/button/edit/:id', (req, res) => {
 
 
 // Route for "Delete" action
-app.get('/button/delete/:id', (req, res) => {
+app.get('/button/delete/:id', isAuthenticated, (req, res) => {
   const userId = req.params.id;
 
   // SQL query to delete the user with the given ID from the database
@@ -290,7 +344,7 @@ app.get('/button/delete/:id', (req, res) => {
     }
 
     console.log(`User with ID ${userId} has been deleted.`);
-    
+
     // Redirect to the /output page after successful deletion
     res.redirect('/output');
   });
@@ -305,10 +359,10 @@ app.get('/button/delete/:id', (req, res) => {
 // Route to handle form submission and file upload
 app.post('/upload', upload.single('image'), (req, res) => {
   const formData = req.body;
-  console.log('Form Data:', formData); 
+  console.log('Form Data:', formData);
   // Access other form data
   const { needs, gender, timing, appointmentDate, appointmentTime, email, phone, firstName, lastName, userMessage, country } = formData;
-  
+
   // Ensure the image is uploaded with the original name
   const imagePath = req.file ? path.join('img', req.file.filename) : ''; // Get file path
 
@@ -338,7 +392,7 @@ app.post('/upload', upload.single('image'), (req, res) => {
     country || null,  // Insert the country value here
   ];
 
- 
+
   console.log("Values to insert: ", values);
 
   // Execute the query to insert the data

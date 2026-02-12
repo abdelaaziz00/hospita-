@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Balabil Clinic</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="split-screen">
+        <div class="split-left">
+            <h1>Welcome Back</h1>
+            <p>Access the Balabil Clinic administration dashboard to manage appointments and patient aesthetics.</p>
+        </div>
+        <div class="split-right">
+            <a href="/" class="back-home"><i class="fas fa-arrow-left"></i> Back to Home</a>
+
+            <div class="login-form-container">
+                <h2>Admin Login</h2>
+                <form action="/login" method="POST">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="admin@example.com" required>
+
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="••••••••" required>
+
+                    <button type="submit" class="btn" style="width: 100%; margin-top: 10px;">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

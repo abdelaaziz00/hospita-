@@ -1,25 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>User Details</title>
+  <title>User Details - Balabil Clinic</title>
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .detail-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+      width: 100%;
+    }
+
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .detail-row:last-child {
+      border-bottom: none;
+    }
+
+    .detail-label {
+      font-weight: 600;
+      color: #2c3e50;
+    }
+
+    .detail-value {
+      color: #555;
+      text-align: right;
+    }
+
+    .user-image {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-top: 20px;
+      text-decoration: none;
+      color: #2c3e50;
+      font-weight: 600;
+    }
+  </style>
 </head>
+
 <body>
-  <h1>User Details</h1>
-  <p><strong>ID:</strong> {{id}}</p>
-  <p><strong>Needs:</strong> {{needs}}</p>
-  <p><strong>Gender:</strong> {{gender}}</p>
-  <p><strong>Timing:</strong> {{timing}}</p>
-  <p><strong>Appointment Date:</strong> {{appointment_date}}</p>
-  <p><strong>Appointment Time:</strong> {{appointment_time}}</p>
-  <p><strong>Email:</strong> {{email}}</p>
-  <p><strong>Phone:</strong> {{phone}}</p>
-  <p><strong>First Name:</strong> {{first_name}}</p>
-  <p><strong>Last Name:</strong> {{last_name}}</p>
-  <p><strong>Message:</strong> {{user_message}}</p>
-  
-  <!-- Image tag with dynamic src path -->
-  <img src="{{image_path}}" alt="User Image" style="max-width: 200px; height: auto;">
+
+
+  <header>
+    <nav class="navbar">
+      <a href="/" class="logo"><span>Balabil</span> Clinic</a>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/upload">Reservation</a></li>
+        <li><a href="/output" class="active">Admin</a></li>
+        <li><a href="#contact" class="btn-contact">Contact Us</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="main-container">
+    <div class="detail-card">
+      <h2 style="color: var(--primary-color); margin-bottom: 20px; text-align: center;">User Details</h2>
+
+      <img src="{{image_path}}" alt="User Image" class="user-image">
+
+      <div class="detail-row">
+        <span class="detail-label">ID</span>
+        <span class="detail-value">{{id}}</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Name</span>
+        <span class="detail-value">{{first_name}} {{last_name}}</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Email</span>
+        <span class="detail-value">{{email}}</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Phone</span>
+        <span class="detail-value">{{phone}}</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Gender</span>
+        <span class="detail-value">{{gender}}</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Needs</span>
+        <span class="detail-value">{{needs}}</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Timing</span>
+        <span class="detail-value">{{timing}}</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Date</span>
+        <span class="detail-value">{{appointment_date}} at {{appointment_time}}</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Message</span>
+        <span class="detail-value">{{user_message}}</span>
+      </div>
+
+      <div style="text-align: center;">
+        <a href="/output" class="btn" style="margin-top: 20px;">Back to Dashboard</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-info">
+        <h3>Balabil Clinic</h3>
+        <p style="color: #bdc3c7;">Excellence in cosmetic surgery.</p>
+      </div>
+      <div class="footer-contact" id="contact">
+        <h3>Contact Us</h3>
+        <a href="tel:+1234567890"><i class="fas fa-phone"></i> +1 234 567 890</a>
+        <a href="mailto:info@balabil.com"><i class="fas fa-envelope"></i> info@balabil.com</a>
+      </div>
+      <div class="footer-social">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 Balabil Clinic. All Rights Reserved.
+    </div>
+  </footer>
 </body>
+
 </html>

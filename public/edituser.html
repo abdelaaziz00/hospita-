@@ -1,46 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Edit User</title>
+  <title>Edit User - Balabil Clinic</title>
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .edit-card {
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      max-width: 800px;
+      width: 100%;
+      margin: 20px auto;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .full-width {
+      grid-column: span 2;
+    }
+  </style>
 </head>
+
 <body>
-  <h1>Edit User Details</h1>
-  <form method="POST" action="/button/edit/{{id}}">
-    <label for="needs">Needs:</label>
-    <input type="text" id="needs" name="needs" value="{{needs}}" required><br><br>
 
-    <label for="gender">Gender:</label>
-    <input type="text" id="gender" name="gender" value="{{gender}}" required><br><br>
+  <header>
+    <nav class="navbar">
+      <a href="/" class="logo"><span>Balabil</span> Clinic</a>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/upload">Reservation</a></li>
+        <li><a href="/output" class="active">Admin</a></li>
+        <li><a href="#contact" class="btn-contact">Contact Us</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <label for="timing">Timing:</label>
-    <input type="text" id="timing" name="timing" value="{{timing}}" required><br><br>
+  <div class="main-container">
+    <div class="edit-card">
+      <h2 style="color: var(--primary-color); margin-bottom: 30px; text-align: center;">Edit User Details</h2>
+      <form method="POST" action="/button/edit/{{id}}">
+        <div class="form-grid">
+          <div>
+            <label for="first_name">First Name:</label>
+            <input type="text" id="first_name" name="first_name" value="{{first_name}}" required>
+          </div>
+          <div>
+            <label for="last_name">Last Name:</label>
+            <input type="text" id="last_name" name="last_name" value="{{last_name}}" required>
+          </div>
 
-    <label for="appointment_date">Appointment Date:</label>
-    <input type="date" id="appointment_date" name="appointment_date" value="{{appointment_date}}"><br><br>
+          <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" value="{{email}}" required>
+          </div>
+          <div>
+            <label for="phone">Phone:</label>
+            <input type="text" id="phone" name="phone" value="{{phone}}" required>
+          </div>
 
-    <label for="appointment_time">Appointment Time:</label>
-    <input type="time" id="appointment_time" name="appointment_time" value="{{appointment_time}}"><br><br>
+          <div>
+            <label for="needs">Needs:</label>
+            <input type="text" id="needs" name="needs" value="{{needs}}" required>
+          </div>
+          <div>
+            <label for="gender">Gender:</label>
+            <input type="text" id="gender" name="gender" value="{{gender}}" required>
+          </div>
 
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" value="{{email}}" required><br><br>
+          <div>
+            <label for="appointment_date">Appointment Date:</label>
+            <input type="date" id="appointment_date" name="appointment_date" value="{{appointment_date}}">
+          </div>
+          <div>
+            <label for="appointment_time">Appointment Time:</label>
+            <input type="time" id="appointment_time" name="appointment_time" value="{{appointment_time}}">
+          </div>
 
-    <label for="phone">Phone:</label>
-    <input type="text" id="phone" name="phone" value="{{phone}}" required><br><br>
+          <div class="full-width">
+            <label for="timing">Timing:</label>
+            <input type="text" id="timing" name="timing" value="{{timing}}" required>
+          </div>
 
-    <label for="first_name">First Name:</label>
-    <input type="text" id="first_name" name="first_name" value="{{first_name}}" required><br><br>
+          <div class="full-width">
+            <label for="user_message">Message:</label>
+            <textarea id="user_message" name="user_message" rows="4">{{user_message}}</textarea>
+          </div>
+        </div>
 
-    <label for="last_name">Last Name:</label>
-    <input type="text" id="last_name" name="last_name" value="{{last_name}}" required><br><br>
+        <div style="text-align: center; margin-top: 20px;">
+          <button type="submit" class="btn">Update Details</button>
+          <a href="/output" class="btn" style="background-color: #95a5a6; margin-left: 10px;">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </div>
 
-    <label for="user_message">Message:</label>
-    <textarea id="user_message" name="user_message">{{user_message}}</textarea><br><br>
-
-    
-
-    <button type="submit">Update</button>
-  </form>
+  <footer>
+    <div class="footer-content">
+      <div class="footer-info">
+        <h3>Balabil Clinic</h3>
+        <p style="color: #bdc3c7;">Excellence in cosmetic surgery.</p>
+      </div>
+      <div class="footer-contact" id="contact">
+        <h3>Contact Us</h3>
+        <a href="tel:+1234567890"><i class="fas fa-phone"></i> +1 234 567 890</a>
+        <a href="mailto:info@balabil.com"><i class="fas fa-envelope"></i> info@balabil.com</a>
+      </div>
+      <div class="footer-social">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 Balabil Clinic. All Rights Reserved.
+    </div>
+  </footer>
 </body>
+
 </html>

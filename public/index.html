@@ -1,157 +1,187 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulaire Consultation Esthétique</title>
-    <link rel="stylesheet" href="style.css">    
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         .step {
             display: none;
         }
+
         .active {
             display: block;
         }
+
         .buttons {
             margin-top: 20px;
         }
     </style>
 </head>
+
 <body>
-    <div class="section-content">
 
-    
-        <div class="image-wrapper">
-            <img class="image" src="img 4.jpeg">
-        </div>
-        <div class="form-container">
-            <h3>Remplissez ce formulaire et obtenez une consultation gratuite et personnalisée par nos experts!</h3>
-            <form id="consultationForm">
-                <!-- Étape 1: Besoin -->
-                
-                <div class="step active">
-                    <h2>Étape 1: Sélectionnez votre besoin</h2>
 
-                    <div class="labels">
-                        <label class="check-items"><input class="input-box" type="checkbox" name="needs[]"  value="Forme du Nez" > Forme du Nez</label><br>
-                        <label class="check-items"><input class="input-box" type="checkbox" name="needs[]" value="Excès de Graisse"> Excès de Graisse</label><br>
-                        <label class="check-items"><input class="input-box" type="checkbox" name="needs[]" value="Rajeunissement du Visage"> Rajeunissement du Visage</label><br>
-                        <label class="check-items"><input class="input-box" type="checkbox" name="needs[]" value="Forme des Seins"> Forme des Seins</label><br>
-                        <label class="check-items"><input class="input-box" type="checkbox" name="needs[]" value="Esthétique des Fesses"> Esthétique des Fesses</label><br>
-                        <label class="check-items"><input class="input-box" type="checkbox" name="needs[]" value="Cicatrice"> Cicatrice</label>
+    <header>
+        <nav class="navbar">
+            <a href="/" class="logo"><span>Balabil</span> Clinic</a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/upload" class="active">Reservation</a></li>
+                <li><a href="/login">Admin</a></li>
+                <li><a href="#contact" class="btn-contact">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="main-container">
+        <div class="section-content">
+
+
+            <div class="image-wrapper">
+                <img class="image" src="img 4.jpeg">
+            </div>
+            <div class="form-container">
+                <h3>Remplissez ce formulaire et obtenez une consultation gratuite et personnalisée par nos experts!</h3>
+                <form id="consultationForm">
+                    <!-- Étape 1: Besoin -->
+
+                    <div class="step active">
+                        <h2>Étape 1: Sélectionnez votre besoin</h2>
+
+                        <div class="labels">
+                            <label class="check-items"><input class="input-box" type="checkbox" name="needs[]"
+                                    value="Forme du Nez"> Forme du Nez</label><br>
+                            <label class="check-items"><input class="input-box" type="checkbox" name="needs[]"
+                                    value="Excès de Graisse"> Excès de Graisse</label><br>
+                            <label class="check-items"><input class="input-box" type="checkbox" name="needs[]"
+                                    value="Rajeunissement du Visage"> Rajeunissement du Visage</label><br>
+                            <label class="check-items"><input class="input-box" type="checkbox" name="needs[]"
+                                    value="Forme des Seins"> Forme des Seins</label><br>
+                            <label class="check-items"><input class="input-box" type="checkbox" name="needs[]"
+                                    value="Esthétique des Fesses"> Esthétique des Fesses</label><br>
+                            <label class="check-items"><input class="input-box" type="checkbox" name="needs[]"
+                                    value="Cicatrice"> Cicatrice</label>
+                        </div>
+
                     </div>
-                    
-                </div>
 
-                <!-- Étape 2: Genre -->
-                <div class="step">
-                    <h2>Étape 2: Vous êtes :</h2>
-                    <label><input type="radio" name="gender" value="Homme" required> Homme</label><br>
-                    <label><input type="radio" name="gender" value="Femme"> Femme</label><br>
-                    <label><input type="radio" name="gender" value="Enfant"> Enfant</label>
-                </div>
+                    <!-- Étape 2: Genre -->
+                    <div class="step">
+                        <h2>Étape 2: Vous êtes :</h2>
+                        <label><input type="radio" name="gender" value="Homme" required> Homme</label><br>
+                        <label><input type="radio" name="gender" value="Femme"> Femme</label><br>
+                        <label><input type="radio" name="gender" value="Enfant"> Enfant</label>
+                    </div>
 
-                <!-- Étape 3: Localisation -->
-                <div class="step">
-                    <h2>Étape 3: Vous habitez :</h2>
-                    <label for="country">Choisissez votre localisation :</label>
-                    <select id="country" onchange="updateCityOptions(this.value)">
-                        <option value="" selected disabled>-- Sélectionnez un pays --</option>
-                        <option value="Morocco">Maroc</option>
-                        <option value="Europe">Europe</option>
-                        <option value="Other">Autre</option>
-                    </select>
-
-                    <!-- Hidden div for city selection, initially hidden -->
-                    <div id="city-selection" style="display: none;">
-                        <label for="city">Sélectionnez une ville :</label>
-                        <select id="city">
-                            <!-- Options will be dynamically added based on the selected country -->
+                    <!-- Étape 3: Localisation -->
+                    <div class="step">
+                        <h2>Étape 3: Vous habitez :</h2>
+                        <label for="country">Choisissez votre localisation :</label>
+                        <select id="country" onchange="updateCityOptions(this.value)">
+                            <option value="" selected disabled>-- Sélectionnez un pays --</option>
+                            <option value="Morocco">Maroc</option>
+                            <option value="Europe">Europe</option>
+                            <option value="Other">Autre</option>
                         </select>
+
+                        <!-- Hidden div for city selection, initially hidden -->
+                        <div id="city-selection" style="display: none;">
+                            <label for="city">Sélectionnez une ville :</label>
+                            <select id="city">
+                                <!-- Options will be dynamically added based on the selected country -->
+                            </select>
+                        </div>
                     </div>
-                </div>
 
 
-                <!-- Étape 4: Date de l'intervention -->
-                <div class="step">
-                    <h2>Étape 4: Vous envisagez votre intervention :</h2>
-                    <label><input type="radio" name="timing" value="Au plus vite" required> Au plus vite</label><br>
-                    <label><input type="radio" name="timing" value="Moins de 2 mois"> Moins de 2 mois</label><br>
-                    <label><input type="radio" name="timing" value="Plus de 2 mois"> Plus de 2 mois</label><br>
-                    <label><input type="radio" name="timing" value="Dans l'année"> Dans l'année</label><br>
-                </div>
+                    <!-- Étape 4: Date de l'intervention -->
+                    <div class="step">
+                        <h2>Étape 4: Vous envisagez votre intervention :</h2>
+                        <label><input type="radio" name="timing" value="Au plus vite" required> Au plus vite</label><br>
+                        <label><input type="radio" name="timing" value="Moins de 2 mois"> Moins de 2 mois</label><br>
+                        <label><input type="radio" name="timing" value="Plus de 2 mois"> Plus de 2 mois</label><br>
+                        <label><input type="radio" name="timing" value="Dans l'année"> Dans l'année</label><br>
+                    </div>
 
-                <!-- Étape 5: Date et Heure -->
-                <div class="step">
-                    <h2>Étape 5: Veuillez renseigner votre rendez-vous :</h2>
-                    <label for="date">Date :</label>
-                    <input type="date" id="date" name="appointmentDate" value="2003-05-06" required><br>
-                    <label for="time">Heure :</label>
-                    <input type="time" id="time" name="appointmentTime" value="05:02" required>
-                </div>
+                    <!-- Étape 5: Date et Heure -->
+                    <div class="step">
+                        <h2>Étape 5: Veuillez renseigner votre rendez-vous :</h2>
+                        <label for="date">Date :</label>
+                        <input type="date" id="date" name="appointmentDate" value="2003-05-06" required><br>
+                        <label for="time">Heure :</label>
+                        <input type="time" id="time" name="appointmentTime" value="05:02" required>
+                    </div>
 
-                <!-- Étape 6: Adresse Email et Téléphone -->
-                <div class="step">
-                    <h2>Étape 6: Veuillez renseigner votre adresse Mail et votre Téléphone</h2>
-                    <label for="email">Adresse Email</label>
-                    <input type="email" id="email" name="email" required><br>
-                    <label for="phone">Téléphone</label>
-                    <input type="tel" id="phone" name="phone" required>
-                </div>
+                    <!-- Étape 6: Adresse Email et Téléphone -->
+                    <div class="step">
+                        <h2>Étape 6: Veuillez renseigner votre adresse Mail et votre Téléphone</h2>
+                        <label for="email">Adresse Email</label>
+                        <input type="email" id="email" name="email" required><br>
+                        <label for="phone">Téléphone</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
 
-                <!-- Étape 7: Nom et Prénom -->
-                <div class="step">
-                    <h2>Étape 7: Veuillez renseigner votre nom et prénom</h2>
-                    <label for="firstName">Prénom :</label>
-                    <input type="text" id="firstName" name="firstName" required><br>
-                    <label for="lastName">Nom :</label>
-                    <input type="text" id="lastName" name="lastName" required>
-                </div>
+                    <!-- Étape 7: Nom et Prénom -->
+                    <div class="step">
+                        <h2>Étape 7: Veuillez renseigner votre nom et prénom</h2>
+                        <label for="firstName">Prénom :</label>
+                        <input type="text" id="firstName" name="firstName" required><br>
+                        <label for="lastName">Nom :</label>
+                        <input type="text" id="lastName" name="lastName" required>
+                    </div>
 
-                <!-- Étape 8: Ajouter une Image et Message -->
-                <div class="step">
-                    <h2>Étape 8: Veuillez télécharger une image et ajouter un message</h2>
-                    <label for="imageUpload">Télécharger votre image :</label>
-                    <input type="file" name="image" />
-                    <label for="userMessage">Votre Message :</label>
-                    <textarea id="userMessage" name="userMessage" rows="4" cols="50" placeholder="Entrez votre message ici..."></textarea>
-                </div>
+                    <!-- Étape 8: Ajouter une Image et Message -->
+                    <div class="step">
+                        <h2>Étape 8: Veuillez télécharger une image et ajouter un message</h2>
+                        <label for="imageUpload">Télécharger votre image :</label>
+                        <input type="file" name="image" />
+                        <label for="userMessage">Votre Message :</label>
+                        <textarea id="userMessage" name="userMessage" rows="4" cols="50"
+                            placeholder="Entrez votre message ici..."></textarea>
+                    </div>
 
-                <!-- Étape 9: Message Confirmation -->
-                <div class="step">
-                    <h2>Étape 9: Message de confirmation</h2>
-                    <p>Merci pour votre soumission. Nous avons bien reçu votre demande et nous reviendrons vers vous sous peu.</p>
-                </div>
+                    <!-- Étape 9: Message Confirmation -->
+                    <div class="step">
+                        <h2>Étape 9: Message de confirmation</h2>
+                        <p>Merci pour votre soumission. Nous avons bien reçu votre demande et nous reviendrons vers vous
+                            sous peu.</p>
+                    </div>
 
-                <!-- Hidden input to store country value -->
-                <input type="hidden" id="hiddenCountry" name="country">
+                    <!-- Hidden input to store country value -->
+                    <input type="hidden" id="hiddenCountry" name="country">
 
-                <!-- Navigation -->
-                <div class="buttons">
-                    <button type="button" class="button " id="prevBtn" onclick="PréchangeStep()" disabled>Précédent</button>
-                    <button type="button" class="button " id="nextBtn" onclick="changeStep(1)">Suivant</button>
-                    <button type="submit" class="button " id="submitBtn" style="display: none;">Soumettre</button>
-                </div>
-            </form>
+                    <!-- Navigation -->
+                    <div class="buttons">
+                        <button type="button" class="button " id="prevBtn" onclick="PréchangeStep()"
+                            disabled>Précédent</button>
+                        <button type="button" class="button " id="nextBtn" onclick="changeStep(1)">Suivant</button>
+                        <button type="submit" class="button " id="submitBtn" style="display: none;">Soumettre</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-    
-    
+
+
     <script>
         let currentStep = 0;
         const steps = document.querySelectorAll('.step');
-    
+
         // Update the hidden country input when the user selects a country
-        document.getElementById('country').addEventListener('change', function() {
+        document.getElementById('country').addEventListener('change', function () {
             document.getElementById('hiddenCountry').value = this.value;
             updateCityOptions(this.value);
         });
-    
+
         function updateCityOptions(country) {
             const citySelection = document.getElementById('city-selection');
             const citySelect = document.getElementById('city');
             citySelect.innerHTML = ''; // Clear previous options
-    
+
             if (country === 'Morocco') {
                 const cities = ['Marrakech', 'Casablanca', 'Rabat', 'Autre'];
                 cities.forEach(city => {
@@ -173,74 +203,74 @@
             } else {
                 citySelection.style.display = 'none';
             }
-    
+
             if (country === 'Other') {
                 changeStep(1); // Skip to Étape 4
             }
         }
-        
+
         var pr = 0
         function changeStep(direction) {
-    const currentForm = steps[currentStep].querySelectorAll('input, select');
-    for (const field of currentForm) {
-        if (!field.checkValidity() && direction === 1) {
-            field.reportValidity();
-            return;
+            const currentForm = steps[currentStep].querySelectorAll('input, select');
+            for (const field of currentForm) {
+                if (!field.checkValidity() && direction === 1) {
+                    field.reportValidity();
+                    return;
+                }
+            }
+
+
+
+            if (currentStep === 3 && direction === 1) {
+                const timing = document.querySelector('input[name="timing"]:checked');
+                if (timing && (timing.value === "Plus de 2 mois" || timing.value === "Dans l'année")) {
+                    currentStep += 2; // Skip Étape 5
+                    pr = 1;
+                } else {
+                    currentStep += 1; // Proceed normally
+                    pr = 0
+                }
+            } else {
+                currentStep += direction;
+            }
+
+            steps.forEach((step, index) => {
+                step.classList.toggle('active', index === currentStep);
+            });
+
+            document.getElementById('prevBtn').disabled = currentStep === 0;
+            document.getElementById('nextBtn').style.display = currentStep === steps.length - 1 ? 'none' : 'inline-block';
+            document.getElementById('submitBtn').style.display = currentStep === steps.length - 1 ? 'inline-block' : 'none';
         }
-    }
 
-   
-
-    if (currentStep === 3 && direction === 1) {
-        const timing = document.querySelector('input[name="timing"]:checked');
-        if (timing && (timing.value === "Plus de 2 mois" || timing.value === "Dans l'année")) {
-            currentStep += 2; // Skip Étape 5
-            pr = 1;
-        } else {
-            currentStep += 1; // Proceed normally
-            pr = 0
+        // Function to go back to the previous step
+        function PréchangeStep() {
+            // Check if we're at Étape 6 (index 5) and pr is 1
+            if (currentStep === 5 && pr === 1) {
+                changeStep(-2); // Go back two steps if at Étape 6 and pr is 1
+            } else {
+                changeStep(-1); // Go back one step in all other cases
+            }
         }
-    } else {
-        currentStep += direction;
-    }
 
-    steps.forEach((step, index) => {
-        step.classList.toggle('active', index === currentStep);
-    });
-
-    document.getElementById('prevBtn').disabled = currentStep === 0;
-    document.getElementById('nextBtn').style.display = currentStep === steps.length - 1 ? 'none' : 'inline-block';
-    document.getElementById('submitBtn').style.display = currentStep === steps.length - 1 ? 'inline-block' : 'none';
-}
-
-// Function to go back to the previous step
-function PréchangeStep() {
-    // Check if we're at Étape 6 (index 5) and pr is 1
-    if (currentStep === 5 && pr === 1) {
-        changeStep(-2); // Go back two steps if at Étape 6 and pr is 1
-    } else {
-        changeStep(-1); // Go back one step in all other cases
-    }
-}
-    
         document.getElementById('consultationForm').addEventListener('submit', async (e) => {
             e.preventDefault();
-    
+
             const form = e.target;
             const formData = new FormData(form);
-    
+
             const timing = form.querySelector('input[name="timing"]:checked');
             if (timing && (timing.value === "Plus de 2 mois" || timing.value === "Dans l'année")) {
                 formData.delete('appointmentDate');
                 formData.delete('appointmentTime');
             }
-    
+
             try {
                 const response = await fetch('http://localhost:5000/upload', {
                     method: 'POST',
                     body: formData,
                 });
-    
+
                 const result = await response.json();
                 if (result.status === 'success') {
                     alert('Votre demande a été soumise avec succès !');
@@ -252,6 +282,28 @@ function PréchangeStep() {
             }
         });
     </script>
-    
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-info">
+                <h3>Balabil Clinic</h3>
+                <p style="color: #bdc3c7;">Excellence in cosmetic surgery.</p>
+            </div>
+            <div class="footer-contact" id="contact">
+                <h3>Contact Us</h3>
+                <a href="tel:+1234567890"><i class="fas fa-phone"></i> +1 234 567 890</a>
+                <a href="mailto:info@balabil.com"><i class="fas fa-envelope"></i> info@balabil.com</a>
+            </div>
+            <div class="footer-social">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 Balabil Clinic. All Rights Reserved.
+        </div>
+    </footer>
 </body>
+
 </html>

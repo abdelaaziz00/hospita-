@@ -1,37 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Appointment Data</title>
-  <link rel="stylesheet" href="style.css"> <!-- Link to your CSS file -->
+  <title>Appointment Data - Balabil Clinic</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
-  <div class="container">
-    <header>
-      <h1>Appointment Data</h1>
-    </header>
-    
-    <table>
-      <thead>
-        <tr>
-          <th>id</th>
-          <th>Needs</th>
-          <th>Gender</th>
-          <th>Timing</th>
-          
-          
-          <th>First Name</th>
-          <th>Last Name</th>
-          
-          <th>action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Data Rows will be inserted dynamically here -->
-        {{data}}
-      </tbody>
-    </table>
+
+
+  <header>
+    <nav class="navbar">
+      <a href="/" class="logo"><span>Balabil</span> Clinic</a>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/upload">Reservation</a></li>
+        <li><a href="/output" class="active">Admin</a></li>
+        <li><a href="#contact" class="btn-contact">Contact Us</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="main-container">
+    <div class="table-container">
+      <h2 style="color: var(--primary-color); margin-bottom: 20px;">Appointment Data</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Needs</th>
+            <th>Gender</th>
+            <th>Timing</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{data}}
+        </tbody>
+      </table>
+    </div>
   </div>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-info">
+        <h3>Balabil Clinic</h3>
+        <p style="color: #bdc3c7;">Excellence in cosmetic surgery.</p>
+      </div>
+      <div class="footer-contact" id="contact">
+        <h3>Contact Us</h3>
+        <a href="tel:+1234567890"><i class="fas fa-phone"></i> +1 234 567 890</a>
+        <a href="mailto:info@balabil.com"><i class="fas fa-envelope"></i> info@balabil.com</a>
+      </div>
+      <div class="footer-social">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 Balabil Clinic. All Rights Reserved.
+    </div>
+  </footer>
 </body>
+
 </html>
